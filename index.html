@@ -16,7 +16,7 @@
       <p>Летнее меню во внутреннем дворике ARTSTUDIO</p>
     </div>
 
-    <a class="pdf-button" href="./assets/menu.pdf" target="_blank" rel="noopener">
+    <a class="pdf-button" href="./assets/Menu.pdf" target="_blank" rel="noopener">
       Скачать PDF
     </a>
   </header>
@@ -58,12 +58,10 @@
       { id: 'cocktails', title: 'Коктейли', alt: 'Коктейли 18+' }
     ];
 
-    const formats = ['webp', 'jpg', 'png'];
     const menuRoot = document.querySelector('.menu');
 
-    function srcFor(index, format) {
-      const pageNumber = String(index + 1).padStart(2, '0');
-      return `./assets/pages/page-${pageNumber}.${format}`;
+    function srcFor(index) {
+      return `./assets/Pages/${index + 1}.jpg`;
     }
 
     pages.forEach((page, index) => {
@@ -76,21 +74,14 @@
       heading.className = 'visually-hidden';
 
       const img = document.createElement('img');
-      img.src = srcFor(index, formats[0]);
+      img.src = srcFor(index);
       img.alt = page.alt;
       img.loading = index === 0 ? 'eager' : 'lazy';
       img.decoding = 'async';
-      img.dataset.formatIndex = '0';
 
       img.onerror = function () {
-        const nextIndex = Number(img.dataset.formatIndex) + 1;
-        if (nextIndex < formats.length) {
-          img.dataset.formatIndex = String(nextIndex);
-          img.src = srcFor(index, formats[nextIndex]);
-          return;
-        }
         section.classList.add('menu-page--missing');
-        section.innerHTML = `<div class="missing-card"><h2>${page.title}</h2><p>Файл страницы не найден. Загрузите изображение в assets/pages/page-${String(index + 1).padStart(2, '0')}.webp, .jpg или .png.</p></div>`;
+        section.innerHTML = `<div class="missing-card"><h2>${page.title}</h2><p>Файл страницы не найден. Проверьте наличие файла assets/Pages/${index + 1}.jpg.</p></div>`;
       };
 
       section.appendChild(heading);
