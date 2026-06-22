@@ -2,7 +2,7 @@
 
 Статическая веб-версия меню для GitHub Pages.
 
-## Структура
+## Текущая структура
 
 ```text
 .
@@ -10,34 +10,36 @@
 ├─ styles.css
 ├─ .nojekyll
 └─ assets/
-   ├─ menu.pdf
-   └─ pages/
-      ├─ page-01.webp / page-01.jpg / page-01.png
-      ├─ page-02.webp / page-02.jpg / page-02.png
-      ├─ page-03.webp / page-03.jpg / page-03.png
-      ├─ page-04.webp / page-04.jpg / page-04.png
-      ├─ page-05.webp / page-05.jpg / page-05.png
-      ├─ page-06.webp / page-06.jpg / page-06.png
-      ├─ page-07.webp / page-07.jpg / page-07.png
-      ├─ page-08.webp / page-08.jpg / page-08.png
-      └─ page-09.webp / page-09.jpg / page-09.png
+   ├─ Menu.pdf
+   └─ Pages/
+      ├─ 1.jpg
+      ├─ 2.jpg
+      ├─ 3.jpg
+      ├─ 4.jpg
+      ├─ 5.jpg
+      ├─ 6.jpg
+      ├─ 7.jpg
+      ├─ 8.jpg
+      └─ 9.jpg
 ```
 
-## Как загрузить ассеты из Canva
+`index.html` настроен именно под эту структуру: изображения берутся из `assets/Pages/`, PDF — из `assets/Menu.pdf`.
+
+## Как выгружать ассеты из Canva
 
 1. В Canva откройте дизайн меню.
 2. Нажмите **Share / Поделиться → Download / Скачать**.
-3. Выберите формат **JPG** или **PNG**. Для быстрой загрузки лучше JPG, для максимальной четкости — PNG.
+3. Выберите формат **JPG**.
 4. Скачайте все страницы.
 5. Переименуйте изображения строго так:
-   - `page-01.jpg`
-   - `page-02.jpg`
+   - `1.jpg`
+   - `2.jpg`
    - ...
-   - `page-09.jpg`
-6. Загрузите изображения в `assets/pages/`.
-7. PDF-версию меню загрузите как `assets/menu.pdf`.
+   - `9.jpg`
+6. Загрузите изображения в `assets/Pages/`.
+7. PDF-версию меню загрузите как `assets/Menu.pdf`.
 
-Страница умеет искать изображения в трех форматах по очереди: `.webp`, `.jpg`, `.png`. Поэтому можно загрузить либо WebP, либо JPG, либо PNG, но названия должны быть `page-01`, `page-02` и так далее.
+Важно: GitHub Pages чувствителен к регистру символов. `assets/Pages/1.jpg` и `assets/pages/page-01.jpg` — разные пути.
 
 ## Как включить GitHub Pages
 
@@ -57,10 +59,10 @@ https://gmartstudionevsky.github.io/courtyard-cafe-menu/
 ## Как обновлять меню
 
 1. Обновите дизайн в Canva.
-2. Скачайте новые страницы.
-3. Сохраните их под теми же именами.
-4. Замените файлы в `assets/pages/`.
-5. Если менялся PDF, замените `assets/menu.pdf`.
+2. Скачайте новые страницы в JPG.
+3. Сохраните их под теми же именами: `1.jpg` ... `9.jpg`.
+4. Замените файлы в `assets/Pages/`.
+5. Если менялся PDF, замените `assets/Menu.pdf`.
 6. Закоммитьте изменения.
 
 QR-код менять не нужно, если адрес сайта остается прежним.
