@@ -2,92 +2,90 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#F6F1E7" />
   <meta name="description" content="Courtyard Café — летнее меню ARTSTUDIO × MemET&Pir" />
   <title>Courtyard Café — Летнее меню</title>
+  <link rel="preload" href="./fonts/HistoryPro-Two.ttf" as="font" type="font/ttf" crossorigin />
+  <link rel="preload" href="./fonts/circe.ttf" as="font" type="font/ttf" crossorigin />
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-  <header class="site-header">
-    <div class="brand">
-      <div class="brand__eyebrow">ARTSTUDIO × MemET&amp;Pir</div>
-      <h1>Courtyard Café</h1>
-      <p>Камерная летняя подача во внутреннем дворике ARTSTUDIO</p>
-    </div>
+  <div class="sticky-shell">
+    <header class="site-header">
+      <div class="brand">
+        <div class="brand__eyebrow">ARTSTUDIO × MemET&amp;Pir</div>
+        <h1>Courtyard Café</h1>
+        <p>Камерная летняя подача во внутреннем дворике ARTSTUDIO</p>
+      </div>
 
-    <a class="pdf-button" href="./assets/Menu.pdf" target="_blank" rel="noopener">
-      Скачать PDF
-    </a>
-  </header>
+      <a class="pdf-button" href="./assets/Menu.pdf" target="_blank" rel="noopener">
+        PDF
+      </a>
+    </header>
 
-  <nav class="section-nav" aria-label="Разделы меню">
-    <a href="#summer">Летний выбор</a>
-    <a href="#drinks">Напитки</a>
-    <a href="#meze">Мезе</a>
-    <a href="#snacks">Закуски</a>
-    <a href="#desserts">Десерты</a>
-    <a href="#salads">Салаты</a>
-    <a href="#tea-coffee">Чай и кофе</a>
-    <a href="#bar">Бар</a>
-    <a href="#cocktails">Коктейли</a>
-  </nav>
+    <nav class="section-nav" aria-label="Разделы меню">
+      <a href="#summer">Летний выбор</a>
+      <a href="#drinks">Напитки</a>
+      <a href="#meze">Мезе</a>
+      <a href="#snacks">Закуски</a>
+      <a href="#desserts">Десерты</a>
+      <a href="#salads">Салаты</a>
+      <a href="#tea-coffee">Чай и кофе</a>
+      <a href="#bar">Бар</a>
+      <a href="#cocktails">Коктейли</a>
+    </nav>
+  </div>
 
   <main class="menu" aria-label="Страницы меню">
-    <noscript>
-      <p class="notice">
-        Для просмотра меню включите JavaScript или скачайте PDF-версию по кнопке выше.
-      </p>
-    </noscript>
+    <section id="summer" class="menu-page" aria-label="Летний выбор">
+      <h2 class="visually-hidden">Летний выбор</h2>
+      <img src="./assets/Pages/1.jpg" width="1055" height="1491" alt="Летнее меню Courtyard Café — летний выбор" fetchpriority="high" loading="eager" decoding="async" />
+    </section>
+
+    <section id="drinks" class="menu-page" aria-label="Напитки">
+      <h2 class="visually-hidden">Напитки</h2>
+      <img src="./assets/Pages/2.jpg" width="1055" height="1491" alt="Домашние лимонады и холодные напитки" loading="lazy" decoding="async" />
+    </section>
+
+    <section id="meze" class="menu-page" aria-label="Мезе к столу">
+      <h2 class="visually-hidden">Мезе к столу</h2>
+      <img src="./assets/Pages/3.jpg" width="1055" height="1491" alt="Мезе к столу" loading="lazy" decoding="async" />
+    </section>
+
+    <section id="snacks" class="menu-page" aria-label="Закуски">
+      <h2 class="visually-hidden">Закуски</h2>
+      <img src="./assets/Pages/4.jpg" width="1055" height="1491" alt="Сыры, рыба и мясные закуски" loading="lazy" decoding="async" />
+    </section>
+
+    <section id="desserts" class="menu-page" aria-label="Десерты">
+      <h2 class="visually-hidden">Десерты</h2>
+      <img src="./assets/Pages/5.jpg" width="1055" height="1491" alt="Турецкие сладости и десерты" loading="lazy" decoding="async" />
+    </section>
+
+    <section id="salads" class="menu-page" aria-label="Салаты">
+      <h2 class="visually-hidden">Салаты</h2>
+      <img src="./assets/Pages/6.jpg" width="1055" height="1491" alt="Салаты" loading="lazy" decoding="async" />
+    </section>
+
+    <section id="tea-coffee" class="menu-page" aria-label="Чай и кофе">
+      <h2 class="visually-hidden">Чай и кофе</h2>
+      <img src="./assets/Pages/7.jpg" width="1055" height="1491" alt="Чай и кофе" loading="lazy" decoding="async" />
+    </section>
+
+    <section id="bar" class="menu-page" aria-label="Барная карта">
+      <h2 class="visually-hidden">Барная карта</h2>
+      <img src="./assets/Pages/8.jpg" width="1055" height="1491" alt="Барная карта, вино, пиво и сидр 18+" loading="lazy" decoding="async" />
+    </section>
+
+    <section id="cocktails" class="menu-page" aria-label="Коктейли">
+      <h2 class="visually-hidden">Коктейли</h2>
+      <img src="./assets/Pages/9.jpg" width="1055" height="1491" alt="Коктейли 18+" loading="lazy" decoding="async" />
+    </section>
   </main>
 
   <footer class="site-footer">
     <p>Для заказа нажмите кнопку вызова официанта на столе.</p>
   </footer>
-
-  <script>
-    const pages = [
-      { id: 'summer', title: 'Летний выбор', alt: 'Летнее меню Courtyard Café — летний выбор' },
-      { id: 'drinks', title: 'Напитки', alt: 'Домашние лимонады и холодные напитки' },
-      { id: 'meze', title: 'Мезе к столу', alt: 'Мезе к столу' },
-      { id: 'snacks', title: 'Закуски', alt: 'Сыры, рыба и мясные закуски' },
-      { id: 'desserts', title: 'Десерты', alt: 'Турецкие сладости и десерты' },
-      { id: 'salads', title: 'Салаты', alt: 'Салаты' },
-      { id: 'tea-coffee', title: 'Чай и кофе', alt: 'Чай и кофе' },
-      { id: 'bar', title: 'Барная карта', alt: 'Барная карта, вино, пиво и сидр 18+' },
-      { id: 'cocktails', title: 'Коктейли', alt: 'Коктейли 18+' }
-    ];
-
-    const menuRoot = document.querySelector('.menu');
-
-    function srcFor(index) {
-      return `./assets/Pages/${index + 1}.jpg`;
-    }
-
-    pages.forEach((page, index) => {
-      const section = document.createElement('section');
-      section.className = 'menu-page';
-      section.id = page.id;
-
-      const heading = document.createElement('h2');
-      heading.textContent = page.title;
-      heading.className = 'visually-hidden';
-
-      const img = document.createElement('img');
-      img.src = srcFor(index);
-      img.alt = page.alt;
-      img.loading = index === 0 ? 'eager' : 'lazy';
-      img.decoding = 'async';
-
-      img.onerror = function () {
-        section.classList.add('menu-page--missing');
-        section.innerHTML = `<div class="missing-card"><h2>${page.title}</h2><p>Файл страницы не найден. Проверьте наличие файла assets/Pages/${index + 1}.jpg.</p></div>`;
-      };
-
-      section.appendChild(heading);
-      section.appendChild(img);
-      menuRoot.appendChild(section);
-    });
-  </script>
 </body>
 </html>
