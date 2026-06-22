@@ -11,17 +11,13 @@
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-  <div class="sticky-shell">
+  <div class="sticky-shell" id="menuNavigation">
     <header class="site-header">
       <div class="brand">
         <div class="brand__eyebrow">ARTSTUDIO × MemET&amp;Pir</div>
         <h1>Courtyard Café</h1>
         <p>Камерная летняя подача во внутреннем дворике ARTSTUDIO</p>
       </div>
-
-      <a class="pdf-button" href="./assets/Menu.pdf" target="_blank" rel="noopener">
-        PDF
-      </a>
     </header>
 
     <nav class="section-nav" aria-label="Разделы меню">
@@ -87,5 +83,83 @@
   <footer class="site-footer">
     <p>Для заказа нажмите кнопку вызова официанта на столе.</p>
   </footer>
+
+  <script>
+    (() => {
+      const shell = document.getElementById('menuNavigation');
+      const links = Array.from(document.querySelectorAll('.section-nav a'));
+      const sections = links
+        .map((link) => document.querySelector(link.getAttribute('href')))
+        .filter(Boolean);
+
+      if (!shell) return;
+
+      let lastY = window.scrollY;
+      let ticking = false;
+      let keepVisibleUntil = 0;
+
+      function showNavigation() {
+        shell.classList.remove('is-hidden');
+      }
+
+      function hideNavigation() {
+        if (document.activeElement && shell.contains(document.activeElement)) return;
+        shell.classList.add('is-hidden');
+      }
+
+      function updateNavigationVisibility() {
+        const currentY = Math.max(window.scrollY, 0);
+        const delta = currentY - lastY;
+        const nearTop = currentY < 36;
+        const locked = Date.now() < keepVisibleUntil;
+
+        if (nearTop || locked) {
+          showNavigation();
+        } else if (delta > 8 && currentY > 120) {
+          hideNavigation();
+        } else if (delta < -8) {
+          showNavigation();
+        }
+
+        lastY = currentY;
+        ticking = false;
+      }
+
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          window.requestAnimationFrame(updateNavigationVisibility);
+          ticking = true;
+        }
+      }, { passive: true });
+
+      links.forEach((link) => {
+        link.addEventListener('click', () => {
+          keepVisibleUntil = Date.now() + 700;
+          showNavigation();
+        });
+      });
+
+      if ('IntersectionObserver' in window && sections.length) {
+        const observer = new IntersectionObserver((entries) => {
+          const visible = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+          if (!visible) return;
+
+          links.forEach((link) => {
+            const isActive = link.getAttribute('href') === `#${visible.target.id}`;
+            link.toggleAttribute('aria-current', isActive);
+          });
+        }, {
+          root: null,
+          threshold: [0.34, 0.5, 0.66],
+          rootMargin: '-20% 0px -55% 0px'
+        });
+
+        sections.forEach((section) => observer.observe(section));
+      }
+    })();
+  </script>
 </body>
 </html>
