@@ -11,17 +11,6 @@
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-  <nav class="section-nav" id="menuNavigation" aria-label="Разделы меню">
-    <a href="#drinks">Напитки</a>
-    <a href="#meze">Мезе</a>
-    <a href="#snacks">Закуски</a>
-    <a href="#desserts">Десерты</a>
-    <a href="#salads">Салаты</a>
-    <a href="#tea-coffee">Чай и кофе</a>
-    <a href="#bar">Бар</a>
-    <a href="#cocktails">Коктейли</a>
-  </nav>
-
   <main class="menu" aria-label="Страницы меню">
     <section id="summer" class="menu-page" aria-label="Летний выбор">
       <h2 class="visually-hidden">Летний выбор</h2>
@@ -69,6 +58,17 @@
     </section>
   </main>
 
+  <nav class="section-nav" id="menuNavigation" aria-label="Разделы меню">
+    <a href="#drinks">Напитки</a>
+    <a href="#meze">Мезе</a>
+    <a href="#snacks">Закуски</a>
+    <a href="#desserts">Десерты</a>
+    <a href="#salads">Салаты</a>
+    <a href="#tea-coffee">Чай и кофе</a>
+    <a href="#bar">Бар</a>
+    <a href="#cocktails">Коктейли</a>
+  </nav>
+
   <footer class="site-footer">
     <p>Для заказа нажмите кнопку вызова официанта на столе.</p>
   </footer>
@@ -83,49 +83,19 @@
 
       if (!nav) return;
 
-      let lastY = window.scrollY;
-      let ticking = false;
-      let keepVisibleUntil = 0;
+      function setActiveLink(activeLink) {
+        links.forEach((link) => {
+          const isActive = link === activeLink;
+          link.toggleAttribute('aria-current', isActive);
+        });
 
-      function showNavigation() {
-        nav.classList.remove('is-hidden');
-      }
-
-      function hideNavigation() {
-        if (document.activeElement && nav.contains(document.activeElement)) return;
-        nav.classList.add('is-hidden');
-      }
-
-      function updateNavigationVisibility() {
-        const currentY = Math.max(window.scrollY, 0);
-        const delta = currentY - lastY;
-        const nearTop = currentY < 28;
-        const locked = Date.now() < keepVisibleUntil;
-
-        if (nearTop || locked) {
-          showNavigation();
-        } else if (delta > 8 && currentY > 96) {
-          hideNavigation();
-        } else if (delta < -8) {
-          showNavigation();
+        if (activeLink) {
+          activeLink.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
         }
-
-        lastY = currentY;
-        ticking = false;
       }
-
-      window.addEventListener('scroll', () => {
-        if (!ticking) {
-          window.requestAnimationFrame(updateNavigationVisibility);
-          ticking = true;
-        }
-      }, { passive: true });
 
       links.forEach((link) => {
-        link.addEventListener('click', () => {
-          keepVisibleUntil = Date.now() + 650;
-          showNavigation();
-        });
+        link.addEventListener('click', () => setActiveLink(link));
       });
 
       if ('IntersectionObserver' in window && sections.length) {
@@ -136,14 +106,12 @@
 
           if (!visible) return;
 
-          links.forEach((link) => {
-            const isActive = link.getAttribute('href') === `#${visible.target.id}`;
-            link.toggleAttribute('aria-current', isActive);
-          });
+          const activeLink = links.find((link) => link.getAttribute('href') === `#${visible.target.id}`);
+          setActiveLink(activeLink);
         }, {
           root: null,
           threshold: [0.34, 0.5, 0.66],
-          rootMargin: '-18% 0px -58% 0px'
+          rootMargin: '-16% 0px -52% 0px'
         });
 
         sections.forEach((section) => observer.observe(section));
