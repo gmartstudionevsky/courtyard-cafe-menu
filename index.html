@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f4efe4" />
+  <meta name="description" content="Courtyard Café — летнее меню ARTSTUDIO × MemET&Pir" />
+  <title>Courtyard Café — Летнее меню</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <div class="brand__eyebrow">ARTSTUDIO × MemET&amp;Pir</div>
+      <h1>Courtyard Café</h1>
+      <p>Летнее меню во внутреннем дворике ARTSTUDIO</p>
+    </div>
+
+    <a class="pdf-button" href="./assets/menu.pdf" target="_blank" rel="noopener">
+      Скачать PDF
+    </a>
+  </header>
+
+  <nav class="section-nav" aria-label="Разделы меню">
+    <a href="#summer">Летний выбор</a>
+    <a href="#drinks">Напитки</a>
+    <a href="#meze">Мезе</a>
+    <a href="#snacks">Закуски</a>
+    <a href="#desserts">Десерты</a>
+    <a href="#salads">Салаты</a>
+    <a href="#tea-coffee">Чай и кофе</a>
+    <a href="#bar">Бар</a>
+    <a href="#cocktails">Коктейли</a>
+  </nav>
+
+  <main class="menu" aria-label="Страницы меню">
+    <noscript>
+      <p class="notice">
+        Для просмотра меню включите JavaScript или скачайте PDF-версию по кнопке выше.
+      </p>
+    </noscript>
+  </main>
+
+  <footer class="site-footer">
+    <p>Для заказа нажмите кнопку вызова официанта на столе.</p>
+  </footer>
+
+  <script>
+    const pages = [
+      { id: 'summer', title: 'Летний выбор', alt: 'Летнее меню Courtyard Café — летний выбор' },
+      { id: 'drinks', title: 'Напитки', alt: 'Домашние лимонады и холодные напитки' },
+      { id: 'meze', title: 'Мезе к столу', alt: 'Мезе к столу' },
+      { id: 'snacks', title: 'Закуски', alt: 'Сыры, рыба и мясные закуски' },
+      { id: 'desserts', title: 'Десерты', alt: 'Турецкие сладости и десерты' },
+      { id: 'salads', title: 'Салаты', alt: 'Салаты' },
+      { id: 'tea-coffee', title: 'Чай и кофе', alt: 'Чай и кофе' },
+      { id: 'bar', title: 'Барная карта', alt: 'Барная карта, вино, пиво и сидр 18+' },
+      { id: 'cocktails', title: 'Коктейли', alt: 'Коктейли 18+' }
+    ];
+
+    const formats = ['webp', 'jpg', 'png'];
+    const menuRoot = document.querySelector('.menu');
+
+    function srcFor(index, format) {
+      const pageNumber = String(index + 1).padStart(2, '0');
+      return `./assets/pages/page-${pageNumber}.${format}`;
+    }
+
+    pages.forEach((page, index) => {
+      const section = document.createElement('section');
+      section.className = 'menu-page';
+      section.id = page.id;
+
+      const heading = document.createElement('h2');
+      heading.textContent = page.title;
+      heading.className = 'visually-hidden';
+
+      const img = document.createElement('img');
+      img.src = srcFor(index, formats[0]);
+      img.alt = page.alt;
+      img.loading = index === 0 ? 'eager' : 'lazy';
+      img.decoding = 'async';
+      img.dataset.formatIndex = '0';
+
+      img.onerror = function () {
+        const nextIndex = Number(img.dataset.formatIndex) + 1;
+        if (nextIndex < formats.length) {
+          img.dataset.formatIndex = String(nextIndex);
+          img.src = srcFor(index, formats[nextIndex]);
+          return;
+        }
+        section.classList.add('menu-page--missing');
+        section.innerHTML = `<div class="missing-card"><h2>${page.title}</h2><p>Файл страницы не найден. Загрузите изображение в assets/pages/page-${String(index + 1).padStart(2, '0')}.webp, .jpg или .png.</p></div>`;
+      };
+
+      section.appendChild(heading);
+      section.appendChild(img);
+      menuRoot.appendChild(section);
+    });
+  </script>
+</body>
+</html>
