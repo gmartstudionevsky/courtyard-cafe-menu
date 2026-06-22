@@ -11,27 +11,16 @@
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-  <div class="sticky-shell" id="menuNavigation">
-    <header class="site-header">
-      <div class="brand">
-        <div class="brand__eyebrow">ARTSTUDIO × MemET&amp;Pir</div>
-        <h1>Courtyard Café</h1>
-        <p>Камерная летняя подача во внутреннем дворике ARTSTUDIO</p>
-      </div>
-    </header>
-
-    <nav class="section-nav" aria-label="Разделы меню">
-      <a href="#summer">Летний выбор</a>
-      <a href="#drinks">Напитки</a>
-      <a href="#meze">Мезе</a>
-      <a href="#snacks">Закуски</a>
-      <a href="#desserts">Десерты</a>
-      <a href="#salads">Салаты</a>
-      <a href="#tea-coffee">Чай и кофе</a>
-      <a href="#bar">Бар</a>
-      <a href="#cocktails">Коктейли</a>
-    </nav>
-  </div>
+  <nav class="section-nav" id="menuNavigation" aria-label="Разделы меню">
+    <a href="#drinks">Напитки</a>
+    <a href="#meze">Мезе</a>
+    <a href="#snacks">Закуски</a>
+    <a href="#desserts">Десерты</a>
+    <a href="#salads">Салаты</a>
+    <a href="#tea-coffee">Чай и кофе</a>
+    <a href="#bar">Бар</a>
+    <a href="#cocktails">Коктейли</a>
+  </nav>
 
   <main class="menu" aria-label="Страницы меню">
     <section id="summer" class="menu-page" aria-label="Летний выбор">
@@ -86,36 +75,36 @@
 
   <script>
     (() => {
-      const shell = document.getElementById('menuNavigation');
+      const nav = document.getElementById('menuNavigation');
       const links = Array.from(document.querySelectorAll('.section-nav a'));
       const sections = links
         .map((link) => document.querySelector(link.getAttribute('href')))
         .filter(Boolean);
 
-      if (!shell) return;
+      if (!nav) return;
 
       let lastY = window.scrollY;
       let ticking = false;
       let keepVisibleUntil = 0;
 
       function showNavigation() {
-        shell.classList.remove('is-hidden');
+        nav.classList.remove('is-hidden');
       }
 
       function hideNavigation() {
-        if (document.activeElement && shell.contains(document.activeElement)) return;
-        shell.classList.add('is-hidden');
+        if (document.activeElement && nav.contains(document.activeElement)) return;
+        nav.classList.add('is-hidden');
       }
 
       function updateNavigationVisibility() {
         const currentY = Math.max(window.scrollY, 0);
         const delta = currentY - lastY;
-        const nearTop = currentY < 36;
+        const nearTop = currentY < 28;
         const locked = Date.now() < keepVisibleUntil;
 
         if (nearTop || locked) {
           showNavigation();
-        } else if (delta > 8 && currentY > 120) {
+        } else if (delta > 8 && currentY > 96) {
           hideNavigation();
         } else if (delta < -8) {
           showNavigation();
@@ -134,7 +123,7 @@
 
       links.forEach((link) => {
         link.addEventListener('click', () => {
-          keepVisibleUntil = Date.now() + 700;
+          keepVisibleUntil = Date.now() + 650;
           showNavigation();
         });
       });
@@ -154,7 +143,7 @@
         }, {
           root: null,
           threshold: [0.34, 0.5, 0.66],
-          rootMargin: '-20% 0px -55% 0px'
+          rootMargin: '-18% 0px -58% 0px'
         });
 
         sections.forEach((section) => observer.observe(section));
